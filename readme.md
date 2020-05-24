@@ -1,5 +1,18 @@
 
 ## Description
+### 5/25追記
+スクリプトに修正を加えました。
+DBは使いまわせそうなので、
+nowで`get_relation_words.py`, `count.py`の順で実行してください。
+ディレクトリだけ自分の環境に合うよう修正してもらえば大丈夫だと思います。
+`migoro_test.ipynb`をJupyter Notebookで起動し
+`count.py`で出力される`count_hk_all.txt`と`count_hk_70_soa.txt`を
+入力ファイルとすれば結果が出ると思います。
+手元のPCにコピーする際は以下リンクが参考になると思います。
+https://mibel.cs.tsukuba.ac.jp/wiki/index.php?cmd=read&page=%B8%C0%B8%EC%A5%B0%A5%EB%A1%BC%A5%D7%2F%B8%C4%BF%CD%BB%F1%CE%C1%A5%A2%A1%BC%A5%AB%A5%A4%A5%D6%2F%DF%C0%B2%BC%BE%BB%B9%EE%2F%BF%A7%A4%F3%A4%CA%A5%E1%A5%E2&word=scp
+何かエラーが出て解決しなさそうだったら教えてください。
+### ---
+
 ツイートデータからバースト検知を利用して桜の見頃を検出するタスクをやってもらいます。
 私の研究では東京・石川・北海道のデータで実験したので、別の都道府県３つ程度（例：大阪・京都・福岡）で実験してもらいたいです。
 
