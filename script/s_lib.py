@@ -1,3 +1,5 @@
+from pymongo import MongoClient, DESCENDING
+
 def setup_mongo(db_name):
   connection = MongoClient()
   db = connection[db_name]

@@ -2,17 +2,16 @@
 総ツイート数と桜の関連ツイート数を日毎にカウントする
 """
 
-from pymongo import MongoClient, DESCENDING
 from datetime import datetime, timedelta
 import pandas as pd
-from .s_lib import setup_mongo￥
+from s_lib import setup_mongo
 
-result_dir = '/now24/a.saito/work/result/'
-
+result_dir = '/now24/a.saito/tmp/'
 
 def daterange(start, end):
     for n in range((end - start).days):
         yield start + timedelta(n)
+
 
 # 事前に求めた関連キーワードをリストとして読み込む
 def get_relation_words(relation_words_file, rate):
@@ -22,11 +21,11 @@ def get_relation_words(relation_words_file, rate):
         count = is_asosiation_over_zero.sum()
         num = int(round(count * (rate / 100)))
         limit = df.iat[num - 1, 1]
-        word_lst = []
         word_lst = df[df.aso >= limit].word.values.tolist()
         print('file: ' + filename + ', rate: ' + str(rate) + '\n limit: ' +
               str(limit) + ', words_count: ' + str(len(word_lst)))
     return word_lst
+
 
 # 日毎の全ツイート数を求める
 def count_all(p_name, db, start, end):
@@ -50,6 +49,7 @@ def count_all(p_name, db, start, end):
     all_twi_path = result_dir + '/count/' + p_name + '_all.txt'
     with open(all_twi_path, 'w') as af:
         af.write('\n'.join(all_twi))
+
 
 # 日毎の桜の関連ツイート数を数える
 def count_sakura(p_name, db, start, end, relation_words_file):
@@ -91,17 +91,15 @@ def count_sakura(p_name, db, start, end, relation_words_file):
 
 
 def main():
-    dbname = 'dbname'
-    p_name = 'tk'
+    pname = 'hk'
+    relation_words_file = '/now24/a.saito/tmp/' + pname + '_soa.txt'
 
-    db = setup_mongo('2015_' + p + '_twi')
+    db = setup_mongo('2015_hk_twi_1208')
     start = datetime.strptime('20150217', '%Y%m%d')
     end = datetime.strptime('20151231', '%Y%m%d')
 
-    word_lst = get_relation_words(relation_words_file, rate)
-
-    count_all(p_name, db, start, end)
-    count_sakura(p_name, db, start, end, relation_words_file)
+    count_all(pname, db, start, end)
+    count_sakura(pname, db, start, end, relation_words_file)
 
 
 main()
