@@ -46,7 +46,7 @@ def count_all(p_name, db, start, end):
         all_twi_count = collection.find(all_twi_pipe).count()
         all_twi.append('\t'.join([m, d, str(all_twi_count)]))
 
-    all_twi_path = result_dir + '/count/' + p_name + '_all.txt'
+    all_twi_path = result_dir + 'count_' + p_name + '_all.txt'
     with open(all_twi_path, 'w') as af:
         af.write('\n'.join(all_twi))
 
@@ -85,7 +85,7 @@ def count_sakura(p_name, db, start, end, relation_words_file):
                 sakura_twi_count = len(sakura_twis)
             sakura_twi.append('\t'.join([m, d, str(sakura_twi_count)]))
 
-        sakura_twi_path = result_dir + '/count/' + p_name + '_' + str(rate) + '.txt'
+        sakura_twi_path = result_dir + 'count_' + p_name + '_' + str(rate) + '_soa.txt'
         with open(sakura_twi_path, 'w') as sf:
             sf.write('\n'.join(sakura_twi))
 

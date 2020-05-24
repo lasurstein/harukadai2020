@@ -3,17 +3,16 @@
 '桜'の関連度を計算する
 """
 
-from pymongo import MongoClient, DESCENDING
 from s_lib import setup_mongo
-import sys, math, collection
+import sys, math, collections
 
 
-def calc_pmi(sw, w, s, n):
+def calc_pmi(sw, w, s, N):
   pmi = math.log2(((sw + 1) * N) / (w * s))
   return(pmi)
 
 
-def calc_soa(sw, ns_w, w, s, ns, n):
+def calc_soa(sw, ns_w, w, s, ns, N):
     #  soa = math.log2(((sw + 1) * ns)/((ns_w + 1) * s))
     soa = calc_pmi(sw, w, s, N) - calc_pmi(ns_w, w, ns, N)
     return(soa)
@@ -22,7 +21,7 @@ def calc_soa(sw, ns_w, w, s, ns, n):
 def main():
     args = sys.argv
 
-    db = setup_mongo()
+    db = setup_mongo('2014_sakura_twi_1208')
     pname = 'hk'
 
     col = db['season_' + pname]
