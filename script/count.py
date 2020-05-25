@@ -22,7 +22,7 @@ def get_relation_words(relation_words_file, rate):
         num = int(round(count * (rate / 100)))
         limit = df.iat[num - 1, 1]
         word_lst = df[df.aso >= limit].word.values.tolist()
-        print('file: ' + filename + ', rate: ' + str(rate) + '\n limit: ' +
+        print('file: ' + relation_words_file + ', rate: ' + str(rate) + '\n limit: ' +
               str(limit) + ', words_count: ' + str(len(word_lst)))
     return word_lst
 
@@ -54,12 +54,11 @@ def count_all(p_name, db, start, end):
 # 日毎の桜の関連ツイート数を数える
 def count_sakura(p_name, db, start, end, relation_words_file):
     rates = range(10, 101, 10)
-    filename = relation_words_file
 
     # 関連キーワードの使用割合を上位から10％ごと増やしていく
     for rate in rates:
         print('###\t' + str(rate))
-        words = set(get_relation_words(filename, rate))
+        words = set(get_relation_words(relation_words_file, rate))
         sakura_twi = []
         for date in daterange(start, end):
             today = date.isoformat()
